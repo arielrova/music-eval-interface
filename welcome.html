@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Test</title>
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="welcomeScript.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.4.0/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.3.1/firebase-database.js"></script>
+    <script src="firebase.js"></script>
+    <script src="node_modules/mediaelement/build/mediaelement-and-player.min.js"></script>
+    <link rel="stylesheet" href="node_modules/mediaelement/build/mediaelementplayer.min.css" />
+    <link rel="stylesheet" type="text/css" href="style/main.css" />
+    <link rel="stylesheet" type="text/css" href="fonts/museo-sans.css" />
+</head>
+<script>
+var showInstructions = function() {
+    $("#welcome").hide();
+    $("#instructions").show();
+};
+
+var showTrainingOne = function() {
+    $("#instructions").hide();
+    $("#trainingOne").show();
+};
+
+var showTrainingTwo = function() {
+    $("#trainingOne").hide();
+    $("#trainingTwo").show();
+};
+
+var showTrainingThree = function() {
+    $("#trainingTwo").hide();
+    $("#trainingThree").show();
+};
+
+var showRealOne = function() {
+    $("#trainingThree").hide();
+    $("#realOne").show();
+};
+
+var showRealTwo = function() {
+    $("#realOne").hide();
+    $("#realTwo").show();
+};
+
+var showRealThree = function() {
+    $("#realTwo").hide();
+    $("#realThree").show();
+};
+
+var showRealFour = function() {
+    $("#realThree").hide();
+    $("#realFour").show();
+};
+
+var showRealFive = function() {
+    $("#realFour").hide();
+    $("#realFive").show();
+};
+
+var showRealSix = function() {
+    $("#realFive").hide();
+    $("#realSix").show();
+};
+
+var showRealSeven = function() {
+    $("#realSix").hide();
+    $("#realSeven").show();
+};
+
+var showRealEight = function() {
+    $("#realSeven").hide();
+    $("#realEight").show();
+};
+
+var showFinish = function() {
+    $("#realEight").hide();
+    $("#finish").show();
+};
+</script>
+
+<body>
+    <div id="welcome">
+        <h1>Simple Listening Experiment</h1>
+
+        <p>You have been invited to participate in a listening experiment where you will <strong>rate the properties of short
+    music examples</strong>.</p>
+        <p>Before starting the experiment we would like to get a some information about you. Please be aware that <strong>no personal information will be made publicly available</strong>.</p>
+        <p><strong>This information is required</strong>: completing it will help us when we come to analyse the results of the experiment.</p>
+        <form name="welcome" id="myform" action="javascript:showInstructions()">
+            <div id="personal">
+                <p>Please tells us a bit about yourself.</p>
+                <fieldset>
+                    <legend>Sex</legend>
+                    <select name="Sex" required="required" class="collect">
+                        <option selected></option>
+                        <option>Female</option>
+                        <option>Male</option>
+                        <option>Prefer not to say</option>
+                    </select>
+                </fieldset>
+                <fieldset>
+                    <legend>Age</legend>
+                    <input type="number" class="collect" name="Age" min="0" max="99" required="required" />
+                </fieldset>
+                <fieldset>
+                    <legend>Number of years of formal music training or of playing music</legend>
+                    <input type="number" name="YMT" class="collect" min="0" max="99" required="required" />
+                </fieldset>
+            </div>
+            <div id="expertise">
+                <p>Please rate how much you like the following music styles.</p>
+                <fieldset class="expertise">
+                    <legend>Jazz</legend>
+                    <select name="Jazz" required="required" class="collect">
+                        <option selected></option>
+                        <option>Dislike</option>
+                        <option>Neutral</option>
+                        <option>Like</option>
+                    </select>
+                </fieldset>
+                <fieldset class="expertise">
+                    <legend>Rock</legend>
+                    <select name="Rock" required="required" class="collect">
+                        <option selected></option>
+                        <option>Dislike</option>
+                        <option>Neutral</option>
+                        <option>Like</option>
+                    </select>
+                </fieldset>
+                <fieldset class="expertise">
+                    <legend>Funk</legend>
+                    <select name="Funk" required="required" class="collect">
+                        <option selected></option>
+                        <option>Dislike</option>
+                        <option>Neutral</option>
+                        <option>Like</option>
+                    </select>
+                </fieldset>
+                <fieldset class="expertise">
+                    <legend>Pop</legend>
+                    <select name="Pop" required="required" class="collect">
+                        <option selected></option>
+                        <option>Dislike</option>
+                        <option>Neutral</option>
+                        <option>Like</option>
+                    </select>
+                </fieldset>
+                <fieldset class="expertise">
+                    <legend>Samba</legend>
+                    <select name="Samba" required="required" class="collect">
+                        <option selected></option>
+                        <option>Dislike</option>
+                        <option>Neutral</option>
+                        <option>Like</option>
+                    </select>
+                </fieldset>
+                <fieldset class="expertise">
+                    <legend>Reggae</legend>
+                    <select name="Reaggae" required="required" class="collect">
+                        <option selected></option>
+                        <option>Dislike</option>
+                        <option>Neutral</option>
+                        <option>Like</option>
+                    </select>
+                </fieldset>
+                <fieldset class="expertise">
+                    <legend>Folk</legend>
+                    <select name="Folk" required="required" class="collect">
+                        <option selected></option>
+                        <option>Dislike</option>
+                        <option>Neutral</option>
+                        <option>Like</option>
+                    </select>
+                </fieldset>
+            </div>
+            <button type="submit" class="submit-button" id="userData">Next</button>
+        </form>
+    </div>
+    <div id="instructions">
+        <h1>Experiment instructions</h1>
+        <span class="subhead">Please read before starting the experiment</span>
+        <div class="highlight" style="float:right;">
+            Please note that:
+            <ul>
+                <li>You are supposed to listen to each music example only once.</li>
+                <li>Do not begin rating the music example
+                    <br/>before it has finished playing.</li>
+                <li>You must input a rating in every category
+                    <br/>(even if the default position agrees with your rating).</li>
+                <li>You cannot go back to a previous music example
+                    <br/>once you have moved to the next.</li>
+            </ul>
+        </div>
+        <p>You will hear a short music example of 20-30 seconds in length. After this has finished playing you can rate the music example according to the following words:</p>
+        <dl>
+            <dt>Groove</dt>
+            <dd>I feel like I want to move some part of my body in relation to some aspect of the music</dd>
+            <dt>Familiarity</dt>
+            <dd>I am used to listening to this or similar music</dd>
+            <dt>Preference</dt>
+            <dd>I like it!</dd>
+            <dt>Naturalness</dt>
+            <dd>This sounds natural, as if played by good musicians</dd>
+        </dl>
+        <p>Your ratings will be done on a scale from <code>0</code> to <code>10</code>.</p>
+        <ol>
+            <li><code>0</code> means you that the word does not describe your experience of the music <strong>at all</strong>.</li>
+            <li><code>10</code> means you that the word describes your experience of the music <strong>entirely</strong>.</li>
+        </ol>
+        <p>Once you have finished rating a music example click <code>next</code> to move on to the next. As soon as the next page has loaded a new music example will begin to play.</p>
+        <div class="highlight" style="float:right;">
+            <p>Please only use the <code>next</code> button to navigate through the experiment.
+                <br/><strong>Do not use your browser's back, forward or refresh buttons</strong>.</p>
+        </div>
+        <p>In total there are 8 music examples (+ 3 training examples) and we predict that the experiment should take about 10 minutes to complete. You will need to complete the experiment in one session. </p>
+        <p>Your participation in this experiment is completely voluntary. If you wish to stop particitating you may do so at any time, but <strong>you may only participate in this experiment once</strong>.</p>
+        <p>To proceed to the training page click the <code>next</code> button.</p>
+        <a id="submit-link">
+            <button id="submit-button" onclick="showTrainingOne()" type="submit" class="submit-button">Next</button>
+        </a>
+    </div>
+    <div id="trainingOne">
+     <h1>Training, example 1</h1>
+    <audio src="testsong.mp3" type="audio/mp3" class="mejs__player" width="50%"></audio>
+    <form name="trainingOne" class="formToCollect" action="javascript:showTrainingTwo()">
+        <fieldset>
+            <legend>Groove</legend>
+            <p>I feel like I want to move some part of my body in relation to some aspect of the music</p>
+            <select name="Groove" required="required" class="collect">
+                <option selected></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+            </select>
+        </fieldset>
+        <fieldset>
+            <legend>Familiarity</legend>
+            <p>I am used to listening to this or similar music</p>
+            <select name="Familiarity" required="required" class="collect">
+                <option selected></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+            </select>
+        </fieldset>
+        <fieldset>
+            <legend>Preference</legend>
+            <p>I like it!</p>
+            <select name="Preference" required="required" class="collect">
+                <option selected></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+            </select>
+        </fieldset>
+        <fieldset>
+            <legend>Naturalness</legend>
+            <p>This sounds natural, as if played by good musician.</p>
+            <select name="Naturalness" required="required" class="collect">
+                <option selected></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+            </select>
+        </fieldset>
+        <button type="submit" class="submit-button submit-test">Next</button>
+    </form>
+  </div>
+  <div id="trainingTwo">
+     <h1>Training, example 2</h1>
+    <audio src="testsong.mp3" type="audio/mp3" class="mejs__player" width="50%"></audio>
+    <form name="trainingTwo" class="formToCollect" action="javascript:showTrainingThree()">
+        <fieldset>
+            <legend>Groove</legend>
+            <p>I feel like I want to move some part of my body in relation to some aspect of the music</p>
+            <select name="Groove" required="required" class="collect">
+                <option selected></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+            </select>
+        </fieldset>
+        <fieldset>
+            <legend>Familiarity</legend>
+            <p>I am used to listening to this or similar music</p>
+            <select name="Familiarity" required="required" class="collect">
+                <option selected></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+            </select>
+        </fieldset>
+        <fieldset>
+            <legend>Preference</legend>
+            <p>I like it!</p>
+            <select name="Preference" required="required" class="collect">
+                <option selected></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+            </select>
+        </fieldset>
+        <fieldset>
+            <legend>Naturalness</legend>
+            <p>This sounds natural, as if played by good musician.</p>
+            <select name="Naturalness" required="required" class="collect">
+                <option selected></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+            </select>
+        </fieldset>
+        <button type="submit" class="submit-button submit-test">Next</button>
+    </form>
+  </div>
+    <div id="trainingThree">
+     <h1>Training, example 3</h1>
+    <audio src="testsong.mp3" type="audio/mp3" class="mejs__player" width="50%"></audio>
+    <form name="trainingThree" class="formToCollect" action="javascript:showRealOne()">
+        <fieldset>
+            <legend>Groove</legend>
+            <p>I feel like I want to move some part of my body in relation to some aspect of the music</p>
+            <select name="Groove" required="required" class="collect">
+                <option selected></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+            </select>
+        </fieldset>
+        <fieldset>
+            <legend>Familiarity</legend>
+            <p>I am used to listening to this or similar music</p>
+            <select name="Familiarity" required="required" class="collect">
+                <option selected></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+            </select>
+        </fieldset>
+        <fieldset>
+            <legend>Preference</legend>
+            <p>I like it!</p>
+            <select name="Preference" required="required" class="collect">
+                <option selected></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+            </select>
+        </fieldset>
+        <fieldset>
+            <legend>Naturalness</legend>
+            <p>This sounds natural, as if played by good musician.</p>
+            <select name="Naturalness" required="required" class="collect">
+                <option selected></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+            </select>
+        </fieldset>
+        <button type="submit" class="submit-button submit-test">Next</button>
+    </form>
+  </div>
+    <div id="realOne">
+     <h1>Music sample 1</h1>
+    <audio src="testsong.mp3" type="audio/mp3" class="mejs__player" width="50%"></audio>
+    <form name="realOne" class="formToCollect" action="javascript:showRealTwo()">
+        <fieldset>
+            <legend>Groove</legend>
+            <p>I feel like I want to move some part of my body in relation to some aspect of the music</p>
+            <select name="Groove" required="required" class="collect">
+                <option selected></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+            </select>
+        </fieldset>
+        <fieldset>
+            <legend>Familiarity</legend>
+            <p>I am used to listening to this or similar music</p>
+            <select name="Familiarity" required="required" class="collect">
+                <option selected></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+            </select>
+        </fieldset>
+        <fieldset>
+            <legend>Preference</legend>
+            <p>I like it!</p>
+            <select name="Preference" required="required" class="collect">
+                <option selected></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+            </select>
+        </fieldset>
+        <fieldset>
+            <legend>Naturalness</legend>
+            <p>This sounds natural, as if played by good musician.</p>
+            <select name="Naturalness" required="required" class="collect">
+                <option selected></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+            </select>
+        </fieldset>
+        <button type="submit" class="submit-button submit-test">Next</button>
+    </form>
+  </div>
+    <div id="realTwo">
+     <h1>Music example 2</h1>
+    <audio src="testsong.mp3" type="audio/mp3" class="mejs__player" width="50%"></audio>
+    <form name="realTwo" class="formToCollect" action="javascript:showRealThree()">
+        <fieldset>
+            <legend>Groove</legend>
+            <p>I feel like I want to move some part of my body in relation to some aspect of the music</p>
+            <select name="Groove" required="required" class="collect">
+                <option selected></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+            </select>
+        </fieldset>
+        <fieldset>
+            <legend>Familiarity</legend>
+            <p>I am used to listening to this or similar music</p>
+            <select name="Familiarity" required="required" class="collect">
+                <option selected></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+            </select>
+        </fieldset>
+        <fieldset>
+            <legend>Preference</legend>
+            <p>I like it!</p>
+            <select name="Preference" required="required" class="collect">
+                <option selected></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+            </select>
+        </fieldset>
+        <fieldset>
+            <legend>Naturalness</legend>
+            <p>This sounds natural, as if played by good musician.</p>
+            <select name="Naturalness" required="required" class="collect">
+                <option selected></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+            </select>
+        </fieldset>
+        <button type="submit" class="submit-button submit-test">Next</button>
+    </form>
+  </div>
+  <div id="realThree">
+     <h1>Music example 3</h1>
+    <audio src="testsong.mp3" type="audio/mp3" class="mejs__player" width="50%"></audio>
+    <form name="realThree" class="formToCollect" action="javascript:showRealFour()">
+        <fieldset>
+            <legend>Groove</legend>
+            <p>I feel like I want to move some part of my body in relation to some aspect of the music</p>
+            <select name="Groove" required="required" class="collect">
+                <option selected></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+            </select>
+        </fieldset>
+        <fieldset>
+            <legend>Familiarity</legend>
+            <p>I am used to listening to this or similar music</p>
+            <select name="Familiarity" required="required" class="collect">
+                <option selected></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+            </select>
+        </fieldset>
+        <fieldset>
+            <legend>Preference</legend>
+            <p>I like it!</p>
+            <select name="Preference" required="required" class="collect">
+                <option selected></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+            </select>
+        </fieldset>
+        <fieldset>
+            <legend>Naturalness</legend>
+            <p>This sounds natural, as if played by good musician.</p>
+            <select name="Naturalness" required="required" class="collect">
+                <option selected></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+            </select>
+        </fieldset>
+        <button type="submit" class="submit-button submit-test">Next</button>
+    </form>
+  </div>
+  <div id="realFour">
+     <h1>Music example 4</h1>
+    <audio src="testsong.mp3" type="audio/mp3" class="mejs__player" width="50%"></audio>
+    <form name="realFour" action="javascript:showRealFive()" class="formToCollect">
+        <fieldset>
+            <legend>Groove</legend>
+            <p>I feel like I want to move some part of my body in relation to some aspect of the music</p>
+            <select name="Groove" required="required" class="collect">
+                <option selected></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+            </select>
+        </fieldset>
+        <fieldset>
+            <legend>Familiarity</legend>
+            <p>I am used to listening to this or similar music</p>
+            <select name="Familiarity" required="required" class="collect">
+                <option selected></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+            </select>
+        </fieldset>
+        <fieldset>
+            <legend>Preference</legend>
+            <p>I like it!</p>
+            <select name="Preference" required="required" class="collect">
+                <option selected></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+            </select>
+        </fieldset>
+        <fieldset>
+            <legend>Naturalness</legend>
+            <p>This sounds natural, as if played by good musician.</p>
+            <select name="Naturalness" required="required" class="collect">
+                <option selected></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+            </select>
+        </fieldset>
+        <button type="submit" class="submit-button submit-test">Next</button>
+    </form>
+  </div>
+  <div id="realFive">
+     <h1>Music example 5</h1>
+    <audio src="testsong.mp3" type="audio/mp3" class="mejs__player" width="50%"></audio>
+    <form name="realFive" class="formToCollect" action="javascript:showRealSix()">
+        <fieldset>
+            <legend>Groove</legend>
+            <p>I feel like I want to move some part of my body in relation to some aspect of the music</p>
+            <select name="Groove" required="required" class="collect">
+                <option selected></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+            </select>
+        </fieldset>
+        <fieldset>
+            <legend>Familiarity</legend>
+            <p>I am used to listening to this or similar music</p>
+            <select name="Familiarity" required="required" class="collect">
+                <option selected></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+            </select>
+        </fieldset>
+        <fieldset>
+            <legend>Preference</legend>
+            <p>I like it!</p>
+            <select name="Preference" required="required" class="collect">
+                <option selected></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+            </select>
+        </fieldset>
+        <fieldset>
+            <legend>Naturalness</legend>
+            <p>This sounds natural, as if played by good musician.</p>
+            <select name="Naturalness" required="required" class="collect">
+                <option selected></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+            </select>
+        </fieldset>
+        <button type="submit" class="submit-button submit-test">Next</button>
+    </form>
+  </div>
+  <div id="realSix">
+     <h1>Music example 6</h1>
+    <audio src="testsong.mp3" type="audio/mp3" class="mejs__player" width="50%"></audio>
+    <form name="realSix" class="formToCollect" action="javascript:showRealSeven()">
+        <fieldset>
+            <legend>Groove</legend>
+            <p>I feel like I want to move some part of my body in relation to some aspect of the music</p>
+            <select name="Groove" required="required" class="collect">
+                <option selected></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+            </select>
+        </fieldset>
+        <fieldset>
+            <legend>Familiarity</legend>
+            <p>I am used to listening to this or similar music</p>
+            <select name="Familiarity" required="required" class="collect">
+                <option selected></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+            </select>
+        </fieldset>
+        <fieldset>
+            <legend>Preference</legend>
+            <p>I like it!</p>
+            <select name="Preference" required="required" class="collect">
+                <option selected></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+            </select>
+        </fieldset>
+        <fieldset>
+            <legend>Naturalness</legend>
+            <p>This sounds natural, as if played by good musician.</p>
+            <select name="Naturalness" required="required" class="collect">
+                <option selected></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+            </select>
+        </fieldset>
+        <button type="submit" class="submit-button submit-test">Next</button>
+    </form>
+  </div>
+  <div id="realSeven">
+     <h1>Music example 7</h1>
+    <audio src="testsong.mp3" type="audio/mp3" class="mejs__player" width="50%"></audio>
+    <form name="realSeven" class="formToCollect" action="javascript:showRealEight()">
+        <fieldset>
+            <legend>Groove</legend>
+            <p>I feel like I want to move some part of my body in relation to some aspect of the music</p>
+            <select name="Groove" required="required" class="collect">
+                <option selected></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+            </select>
+        </fieldset>
+        <fieldset>
+            <legend>Familiarity</legend>
+            <p>I am used to listening to this or similar music</p>
+            <select name="Familiarity" required="required" class="collect">
+                <option selected></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+            </select>
+        </fieldset>
+        <fieldset>
+            <legend>Preference</legend>
+            <p>I like it!</p>
+            <select name="Preference" required="required" class="collect">
+                <option selected></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+            </select>
+        </fieldset>
+        <fieldset>
+            <legend>Naturalness</legend>
+            <p>This sounds natural, as if played by good musician.</p>
+            <select name="Naturalness" required="required" class="collect">
+                <option selected></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+            </select>
+        </fieldset>
+        <button type="submit" class="submit-button submit-test">Next</button>
+    </form>
+  </div>
+  <div id="realEight">
+     <h1>Music example 8</h1>
+    <audio src="testsong.mp3" type="audio/mp3" class="mejs__player" width="50%"></audio>
+    <form name="realEight" class="formToCollect" action="javascript:showFinish()">
+        <fieldset>
+            <legend>Groove</legend>
+            <p>I feel like I want to move some part of my body in relation to some aspect of the music</p>
+            <select name="Groove" required="required" class="collect">
+                <option selected></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+            </select>
+        </fieldset>
+        <fieldset>
+            <legend>Familiarity</legend>
+            <p>I am used to listening to this or similar music</p>
+            <select name="Familiarity" required="required" class="collect">
+                <option selected></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+            </select>
+        </fieldset>
+        <fieldset>
+            <legend>Preference</legend>
+            <p>I like it!</p>
+            <select name="Preference" required="required" class="collect">
+                <option selected></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+            </select>
+        </fieldset>
+        <fieldset>
+            <legend>Naturalness</legend>
+            <p>This sounds natural, as if played by good musician.</p>
+            <select name="Naturalness" required="required" class="collect">
+                <option selected></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+            </select>
+        </fieldset>
+        <button type="submit" class="submit-button submit-test">Next</button>
+    </form>
+  </div>
+  <div id="finish">
+     <h1>Thanks for participating</h1>  
+  </div>
+</body>
+
+</html>
