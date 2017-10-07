@@ -1,5 +1,6 @@
+
+// Creates a random ID for Firebase
 var dbid = parseInt(Math.random() * (999999 - 1) + 1);
-console.log(dbid);
 
 var config = {
     apiKey: "AIzaSyClbiWyZvor4u8k71PWDAtV1FYRHqyds6k",

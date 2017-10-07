@@ -1,0 +1,101 @@
+/* add styles here */
+
+body {
+    font-family: 'museo-sans', sans-serif;
+    padding:4px;
+    color:#555;
+}
+
+#app {
+    text-align: center;
+}    
+
+h1 {
+    font-size: 2em;
+}
+
+.subhead {
+    font-weight: bold;
+}
+
+.subhead:before {
+    content: "("
+}
+
+.subhead:after {
+    content: ")"
+}
+
+/* dl { */
+/*     border: 1px solid; */
+/*     padding: 1em; */
+/* } */
+
+dt {
+    font-weight: bold;
+}
+
+dd {
+    font-style: italic;
+}
+
+form {
+  padding:4px;
+  margin:6px;
+}
+
+label {
+    font-size: 0.8em;
+    padding: 0 1em 0 1em;
+}
+
+fieldset {
+    min-height: 50px;
+    margin: 0.5em 0 0.5em 0;
+    padding: 0.5em;
+}
+
+legend {
+    text-align: left;
+}
+
+span.word {
+    font-weight: bold;
+}
+
+span.desc {
+    font-style: italic;
+}
+
+span#disagreement {
+    float: left;
+    margin-left: 25px;
+}
+
+span#agreement {
+    float: right;
+    margin-right: 25px;
+}
+
+div#header {
+    width: 95%;
+    text-align: center;
+    margin: auto;
+}
+
+
+.submit-button {
+    font-size: 2em;
+    font-weight: bold;
+    font-family: 'museo-sans', sans-serif;
+    color:#555;
+    margin-top: 0.5em;
+}
+
+.highlight {
+    text-weight:strong;
+    border: 1px solid;
+    margin:1em;
+    padding:1em;
+    background:#eee;
+}

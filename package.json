@@ -1,0 +1,27 @@
+{
+  "name": "perception-of-music-test-interface",
+  "version": "1.0.0",
+  "description": "",
+  "main": "welcome.html",
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "firebase": "^4.4.0",
+    "mediaelement": "^4.2.6",
+    "jqueryui": "^1.11.1",
+    "jquery": "^3.2.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arielrova/music-eval-interface.git"
+  },
+  "author": "Ariel Blomkvist Rova",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/arielrova/music-eval-interface/issues"
+  },
+  "homepage": "https://github.com/arielrova/music-eval-interface#readme"
+}

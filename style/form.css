@@ -1,0 +1,53 @@
+
+/* form style */
+#myform {
+	padding:15px 20px; 
+	margin:0 auto;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;	
+} 
+
+/* input field */
+#myform input {
+    padding:none;
+}
+
+/* error message */
+.error {
+	height:15px;
+	font-size:11px;
+	padding:4px 10px;
+	color:red;
+}
+
+.error p {
+	margin:0;		
+}
+
+/* field label */
+label {
+	display:block;
+}
+
+fieldset {
+    padding: none;
+    margin-bottom: 0em;
+    margin-top: 0em;
+}
+
+.expertise label {
+    display:inline;
+}
+
+#personal {
+    width: 49%;
+    float: left;
+}
+#expertise {
+    width: 49%;
+    float: right;
+}
+
+#myform button {
+    clear: both;
+}
