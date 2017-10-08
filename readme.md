@@ -12,7 +12,9 @@ For maximal ease of use, this app is 100% client-based, it does not depend on an
 
 
 7. Write a Data retrieval function
-8. Generalize the Slider-functions, i.e., the test runners can truly enter any number of parameters to test for. 
+8. Generalize the Slider-functions, i.e., the test runners can truly enter any number of parameters to test for.
+9. Generalize the song loading functions.
+10. Set up settings and generalizations for training examples 
 
 ### Finished stuff
 
