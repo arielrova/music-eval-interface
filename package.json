@@ -4,7 +4,6 @@
   "description": "",
   "main": "welcome.html",
   "dependencies": {
-    "bootstrap": "^3.3.7",
     "firebase": "^4.4.0",
     "mediaelement": "^4.2.6",
     "jqueryui": "^1.11.1",

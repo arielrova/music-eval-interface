@@ -1,6 +1,7 @@
 
 // Creates a random ID for Firebase
 var dbid = parseInt(Math.random() * (999999 - 1) + 1);
+console.log(dbid);
 
 var config = {
     apiKey: "AIzaSyClbiWyZvor4u8k71PWDAtV1FYRHqyds6k",
@@ -17,9 +18,13 @@ firebase.initializeApp(config);
 var database = firebase.database();
 
 var setUserData = function(data) {
+  console.log("hello, Firebase User data set!");
   database.ref(dbid + "/" + "testUserData").set(data);
 };
 
 var setTestData = function(data, test) {
+  console.log("hello, Firebase TestData set!");
+  console.log(data);
+  console.log(test);
   database.ref(dbid + "/" + test).set(data);
 };

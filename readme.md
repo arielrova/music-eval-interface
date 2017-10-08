@@ -10,8 +10,6 @@ For maximal ease of use, this app is 100% client-based, it does not depend on an
 
 ### Todo-list
 
-1. Save slider data to Firebase
-2. Implement templates, tests & finish-survey
 3. Implement finish-survey
 4. Implement routing/generation of instances
 5. Fix the audio-player, forcing participants to listen to the whole sound before giving their ratings. Also hiding the next button as well as the pause and/or fast forward.
@@ -22,3 +20,5 @@ For maximal ease of use, this app is 100% client-based, it does not depend on an
 ### Finished stuff
 
 1. Hardcorded, fully workable prototype
+1. Implement Sliders and read values + push to Firebase
+2. Implement templates, tests & finish-survey
