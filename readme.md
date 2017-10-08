@@ -10,10 +10,7 @@ For maximal ease of use, this app is 100% client-based, it does not depend on an
 
 ### Todo-list
 
-3. Implement finish-survey
-4. Implement routing/generation of instances
-5. Fix the audio-player, forcing participants to listen to the whole sound before giving their ratings. Also hiding the next button as well as the pause and/or fast forward.
-6. Fix formatting on Instructions Page 
+
 7. Write a Data retrieval function
 8. Generalize the Slider-functions, i.e., the test runners can truly enter any number of parameters to test for. 
 
@@ -22,3 +19,7 @@ For maximal ease of use, this app is 100% client-based, it does not depend on an
 1. Hardcorded, fully workable prototype
 1. Implement Sliders and read values + push to Firebase
 2. Implement templates, tests & finish-survey
+3. Implement finish-survey
+4. Implement routing/generation of instances
+5. Fix the audio-player, forcing participants to listen to the whole sound before giving their ratings. Also hiding the next button as well as the pause and/or fast forward.
+6. Fix formatting on Instructions Page 

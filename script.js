@@ -13,20 +13,7 @@ $(document).ready(function() {
 
     var songsToPlay = settings.songs;
 
-    $(function() {
-        $('#audio-player').mediaelementplayer({
-            alwaysShowControls: true,
-            features: ['volume'],
-            audioVolume: 'horizontal',
-            audioWidth: 450,
-            audioHeight: 70,
-            iPadUseNativeControls: true,
-            iPhoneUseNativeControls: true,
-            AndroidUseNativeControls: true
-        });
-    });
-
-    var generateTestCard = function(testid, headerString) {
+    var generateTestCard = function(testid) {
 
         $(function() {
             $("#familiarity-slider").slider({
@@ -64,7 +51,6 @@ $(document).ready(function() {
                 step: 1,
                 slide: function(event, ui) {
                     $("#naturalness-amount").val(ui.value);
-                    console.log(ui.value);
                     testData.naturalness = ui.value;
                 }
             });
@@ -80,44 +66,43 @@ $(document).ready(function() {
                 step: 1,
                 slide: function(event, ui) {
                     $("#preference-amount").val(ui.value);
-                    console.log(ui.value);
                     testData.preference = ui.value;
                 }
             });
             $("#preference-amount").val($("#preference-slider").slider("value"));
         });
+
         $("#testcard").append("<div id='" + testid + "'>" +
-            "<h1>" + headerString + "</h1>" +
             "<form name='" + testid + "' class='formToCollect'> " +
             "<fieldset> " +
             "<legend>Familiarity</legend> " +
-            "<p>I am used to listening to this or similar music</p> " +
+            "<p><strong>I am used to listening to this or similar music</strong> (0 = Not at all, 10 = The majority of the music i listen to sounds like this)</p> " +
             "<input type='text' id='familiarity-amount' readonly style='border:0; color:#f6931f; font-weight:bold;'> " +
             " <label for='familiarity-slider'>Your score:</label> " +
             "<div id='familiarity-slider' name='familiarity-slider' class='collect'></div> " +
             " </fieldset> " +
             "<fieldset> " +
             "   <legend>Groove</legend> " +
-            "  <p>I feel like I want to move some part of my body in relation to some aspect of the music</p> " +
+            "  <p><strong>I feel like I want to move some part of my body in relation to some aspect of the music</strong> (0 = Not at all, 10 = Very much)</p> " +
             " <input type='text' id='groove-amount' readonly style='border:0; color:#f6931f; font-weight:bold;'> " +
             "<label for='groove-slider'>Your score:</label> " +
             "<div id='groove-slider' name='groove-slider' class='collect'></div> " +
             "</fieldset> " +
             "<fieldset> " +
             "   <legend>Preference</legend> " +
-            "  <p>I like it!</p> " +
+            "  <p><strong>I like it!</strong> (0 = Not at all, 10 = I like it alot!)</p> " +
             " <input type='text' id='preference-amount' readonly style='border:0; color:#f6931f; font-weight:bold;'> " +
             "<label for='preference-slider'>Your score:</label> " +
             "<div id='preference-slider' name='preference-slider' class='collect'></div> " +
             " </fieldset> " +
             " <fieldset> " +
             " <legend>Naturalness</legend> " +
-            "<p>This sounds natural, as if played by good musician.</p> " +
+            "<p><strong>This sounds natural, as if played by good musician.</strong> (0 = Not at all, 10 = It sounds very natural)</p> " +
             "<input type='text' id='naturalness-amount' readonly style='border:0; color:#f6931f; font-weight:bold;'> " +
             "<label for='naturalness-slider'>Your score:</label> " +
             "<div id='naturalness-slider' name='naturalness-slider' class='collect'></div> " +
             "</fieldset> " +
-            "<button type='button' class='submit-button submit-test' id='userData'>Next</button> " +
+            "<button type='button' class='submit-button submit-test' id='userData'>Next</button>" +
             "</form> " +
             "</div>");
 
@@ -126,6 +111,9 @@ $(document).ready(function() {
             var testid = $(".formToCollect:visible").attr("name");
             setTestData(testData, testid);
             testData = {};
+            for (var i = 0; i < settings.testParameters.length; i++) {
+                testData[settings.testParameters[i]] = 5;
+            }
             showNext();
         });
     };
@@ -147,6 +135,16 @@ $(document).ready(function() {
         setUserData(userData);
     });
 
+    $("#finishData").click(function() {
+        var finishData = {};
+        $(".collect:visible").each(function(i) {
+            var name = ($(this).attr("name"));
+            var value = ($(this).val());
+            finishData[name] = value;
+        });
+        setFinishData(finishData);
+    });
+
     var showNext = function() {
         if ($("#testcard").not(':empty')) {
             $("#testcard").empty();
@@ -157,8 +155,15 @@ $(document).ready(function() {
             nextString = next.split(".");
             nextString = nextString[0];
             next = nextString;
-            nextString = nextString.replace("-", " ");
-            generateTestCard(next, nextString);
+            console.log(nextString);
+            if (nextString == "training-1" || nextString == "training-2" || nextString == "training-3") {
+                nextString = nextString.replace("-", " ");
+            } else {
+                nextString = "Live experiment";
+            }
+            $("#testcard").append("<h1>" + nextString + "</h1>");
+            setTimeout(generateTestCard, 9000, next);
+
         } else {
             $("#finish").show();
         }
@@ -179,9 +184,11 @@ $(document).ready(function() {
         }).appendTo("#audio-container");
 
         $('audio').mediaelementplayer({
+            features: ['volume'],
             success: function(mediaElement, domObject) {
                 mediaElement.play();
             }
         });
+
     };
 });

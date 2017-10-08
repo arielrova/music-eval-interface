@@ -127,16 +127,12 @@
         <div class="highlight">
             Please note that:
             <ul>
-                <li>You are supposed to listen to each music example only once.</li>
-                <li>Do not begin rating the music example
-                    <br/>before it has finished playing.</li>
-                <li>You must input a rating in every category
-                    <br/>(even if the default position agrees with your rating).</li>
-                <li>You cannot go back to a previous music example
-                    <br/>once you have moved to the next.</li>
+                <li>You can only listen to each music example only once.</li>
+                <li>Do not begin rating the music example before it has finished playing.</li>
+                <li>You cannot go back to a previous music example once you have moved to the next.</li>
             </ul>
         </div>
-        <p>You will hear a short music example of 20-30 seconds in length. After this has finished playing you can rate the music example according to the following words:</p>
+        <p>You will hear a short music example of 10 seconds in length. After this has finished playing you can rate the music example according to the following words:</p>
         <dl>
             <dt>Groove</dt>
             <dd>I feel like I want to move some part of my body in relation to some aspect of the music</dd>
@@ -157,19 +153,58 @@
             <p>Please only use the <code>next</code> button to navigate through the experiment.
                 <br/><strong>Do not use your browser's back, forward or refresh buttons</strong>.</p>
         </div>
-        <p>In total there are 8 music examples (+ 3 training examples) and we predict that the experiment should take about 10 minutes to complete. You will need to complete the experiment in one session. </p>
+        <p>In total there are 15 music examples (+ 3 training examples) and we predict that the experiment should take about 15 minutes to complete. You will need to complete the experiment in one session. </p>
         <p>Your participation in this experiment is completely voluntary. If you wish to stop particitating you may do so at any time, but <strong>you may only participate in this experiment once</strong>.</p>
         <p>To proceed to the training page click the <code>next</code> button.</p>
         <a id="submit-link">
             <button id="instruction-button" type="submit" class="submit-button">Next</button>
         </a>
     </div>
-            <div id="music-player">
+    <div id="music-player">
         <div id="audio-container"></div>
     </div>
     <div id="testcard"></div>
     <div id="finish">
-        <h1>Thanks for participating</h1>
+        <h1>Thanks for participating!</h1>
+        <p>Please answer these quick questions about how you perceived the experiment</p>
+        <div id="finish-questions">
+            <form name="finish-data">
+                <p>Please tells us a bit about yourself.</p>
+                <fieldset>
+                    <legend>In general, how realistic did you perceive the music to be? (0 = not realistic at all, 10 = very realistic)</legend>
+                    <select name="realism" required="required" class="collect">
+                        <option selected></option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                    </select>
+                </fieldset>
+                <fieldset>
+                    <legend>How interesting did you find this experiment to be?</legend>
+                    <select name="interest" required="required" class="collect">
+                        <option selected></option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                    </select>
+                </fieldset>
+                <button type="submit" class="submit-button" id="finishData">Finish</button>
+            </form>
+        </div>
     </div>
 </body>
 
